@@ -22,7 +22,13 @@ public class Vida {
 	}
 
 	private int getVizinho(int i, int j){
-		return field[i][j];
+
+		try {
+			return field[i][j];
+		} catch (Exception e) {
+			return 0;
+		}
+
 	}
 
 	public int contarVizinhos(int i, int j) {
@@ -46,14 +52,18 @@ public class Vida {
 	public int[][] proximaGeracao() {
 
 		int nextField[][] = new int[this.tamanho][this.tamanho];
+		
+		int vizinhos = 0;
 
 		for (int i = 0; i < this.tamanho; i++) {
 
 			for (int j = 0; j < this.tamanho; j++) {
+				
+				vizinhos = contarVizinhos(i, j);
 
 				if (field[i][j] == 1) {
 
-					if (contarVizinhos(i, j) < 2 || contarVizinhos(i, j) > 3) {
+					if (vizinhos < 2 || vizinhos > 3) {
 						nextField[i][j] = 0;
 					} else {
 						nextField[i][j] = 1;
@@ -61,7 +71,7 @@ public class Vida {
 
 				} else {
 
-					if (contarVizinhos(i, j) == 3) {
+					if (vizinhos == 3) {
 						nextField[i][j] = 1;
 					} else {
 						nextField[i][j] = 0;
