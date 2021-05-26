@@ -16,6 +16,8 @@ public class Application {
 		while(desejaContinuar()) {
 			jogoDaVida.simularNovaGeracao();
 		}
+		
+		System.out.println("Ok, bye!");
 
 	}
 
@@ -27,21 +29,33 @@ public class Application {
 
 		Scanner scanner = new Scanner(System.in);
 		String resposta = "";
+		
+		Boolean valid = false;
 
-		while(!(resposta.equals(RESPOSTA_ACEITE) || resposta.equals(RESPOSTA_NEGACAO))) {
+		while(!valid) {
 
 			imprimirPergunta(resposta);
 			resposta = scanner.nextLine();
+			
+			valid = isRespostaValida(resposta);
+			
+			if(!valid) {
+				System.out.println("Resposta inválida.");
+			}
 
 		}
 
 		return resposta;
 
 	}
+	
+	private static boolean isRespostaValida(String resposta) {
+		return resposta.equals(RESPOSTA_ACEITE) || resposta.equals(RESPOSTA_NEGACAO);
+	}
 
 	private static void imprimirPergunta(String resposta) {
 
-		String out = (resposta.equals("") ? "Resposta inválida. " : "") + "Deseja consultar a próxima geração?";
+		String out = "Deseja consultar a próxima geração?";
 		System.out.println(out);
 
 	}
