@@ -57,7 +57,7 @@ public class VidaTest {
 
                     assertEquals(proximaGeracaoMatriz[i][j], matrizResultado[i][j]);
                 }
-                     			 
+
             }
     }
 
